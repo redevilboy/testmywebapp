@@ -1,1 +1,384 @@
-test
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AdminLTE 3 | Multi-Step Form</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <!-- Theme style (AdminLTE v3 CDN) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+
+  <style>
+    /* Custom Styles for Animation */
+    .step-section {
+      display: none;
+      animation: fadeIn 0.5s;
+    }
+    .step-section.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    /* Progress Bar Striped Animation */
+    .progress-bar-striped {
+      background-image: linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+      background-size: 1rem 1rem;
+    }
+  </style>
+</head>
+<body class="hold-transition layout-top-nav bg-light">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand-md navbar-light navbar-white shadow-sm">
+    <div class="container">
+      <a href="#" class="navbar-brand">
+        <span class="brand-text font-weight-light">Admin<b>LTE</b> 3</span>
+      </a>
+
+      <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0"> แบบฟอร์มลงทะเบียน</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <div class="content">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            
+            <!-- Main Card -->
+            <div class="card card-primary card-outline">
+              <div class="card-header">
+                <h3 class="card-title" id="step-title">ลงทะเบียนพนักงานใหม่</h3>
+                <div class="card-tools">
+                    <!-- Step Indicator Text -->
+                    <span class="badge badge-primary" id="step-badge">Step 1/4</span>
+                </div>
+              </div>
+
+              <!-- Form Start -->
+              <form id="multiStepForm">
+                <div class="card-body">
+                  
+                  <!-- Progress Bar -->
+                  <div class="mb-4">
+                    <div class="d-flex justify-content-between mb-1">
+                      <span id="progress-text">0% เสร็จสิ้น</span>
+                    </div>
+                    <div class="progress progress-sm">
+                      <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated" role="progressbar" 
+                           aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%" id="progress-bar">
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Step 1: Account Info -->
+                  <div class="step-section active" id="step1">
+                    <div class="callout callout-info">
+                      <h5><i class="fas fa-lock mr-1"></i> ข้อมูลบัญชีผู้ใช้</h5>
+                      <p>กรุณากำหนดอีเมลและรหัสผ่านสำหรับเข้าสู่ระบบ</p>
+                    </div>
+
+                    <div class="form-group">
+                      <label>อีเมลแอดเดรส <span class="text-danger">*</span></label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                        </div>
+                        <input type="email" class="form-control" name="email" id="inputEmail" placeholder="example@adminlte.io" required>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label>รหัสผ่าน <span class="text-danger">*</span></label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                        </div>
+                        <input type="password" class="form-control" name="password" id="inputPassword" placeholder="********" required>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /.Step 1 -->
+
+                  <!-- Step 2: Personal Info -->
+                  <div class="step-section" id="step2">
+                    <div class="callout callout-info">
+                        <h5><i class="fas fa-user mr-1"></i> ข้อมูลส่วนตัว</h5>
+                        <p>รายละเอียดทั่วไปของพนักงาน</p>
+                    </div>
+
+                    <div class="form-group">
+                      <label>ชื่อ-นามสกุล</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        </div>
+                        <input type="text" class="form-control" name="fullName" id="inputName" placeholder="ชื่อ นามสกุล">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label>ที่อยู่ปัจจุบัน</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                        </div>
+                        <textarea class="form-control" name="address" id="inputAddress" rows="3" placeholder="ที่อยู่..."></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /.Step 2 -->
+
+                  <!-- Step 3: Work Info -->
+                  <div class="step-section" id="step3">
+                    <div class="callout callout-info">
+                        <h5><i class="fas fa-briefcase mr-1"></i> ข้อมูลการทำงาน</h5>
+                        <p>สังกัดและตำแหน่งงาน</p>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>แผนก</label>
+                                <select class="form-control" name="department" id="inputDept">
+                                    <option value="">-- เลือกแผนก --</option>
+                                    <option value="IT">Information Technology</option>
+                                    <option value="HR">Human Resources</option>
+                                    <option value="Sales">Sales & Marketing</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>ตำแหน่ง</label>
+                                <input type="text" class="form-control" name="role" id="inputRole" placeholder="เช่น Senior Developer">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>วันที่เริ่มงาน</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                            </div>
+                            <input type="date" class="form-control" name="startDate" id="inputDate">
+                        </div>
+                    </div>
+                  </div>
+                  <!-- /.Step 3 -->
+
+                  <!-- Step 4: Review -->
+                  <div class="step-section" id="step4">
+                    <div class="text-center mb-4">
+                        <h3><i class="fas fa-check-circle text-success"></i> ตรวจสอบความถูกต้อง</h3>
+                        <p class="text-muted">กรุณายืนยันข้อมูลก่อนบันทึก</p>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <tbody>
+                                <tr>
+                                    <th style="width: 30%">อีเมล</th>
+                                    <td id="summary-email">-</td>
+                                </tr>
+                                <tr>
+                                    <th>ชื่อ-นามสกุล</th>
+                                    <td id="summary-name">-</td>
+                                </tr>
+                                <tr>
+                                    <th>ที่อยู่</th>
+                                    <td id="summary-address">-</td>
+                                </tr>
+                                <tr>
+                                    <th>แผนก</th>
+                                    <td id="summary-dept">-</td>
+                                </tr>
+                                <tr>
+                                    <th>ตำแหน่ง</th>
+                                    <td id="summary-role">-</td>
+                                </tr>
+                                <tr>
+                                    <th>วันที่เริ่มงาน</th>
+                                    <td id="summary-date">-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="alert alert-warning mt-3">
+                        <h5><i class="icon fas fa-exclamation-triangle"></i> หมายเหตุ!</h5>
+                        เมื่อกดปุ่ม "บันทึกข้อมูล" ระบบจะทำการบันทึกข้อมูลเข้าสู่ฐานข้อมูลทันที
+                    </div>
+                  </div>
+                  <!-- /.Step 4 -->
+
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer d-flex justify-content-between">
+                  <button type="button" class="btn btn-default" id="prevBtn" disabled>
+                    <i class="fas fa-chevron-left"></i> ย้อนกลับ
+                  </button>
+                  
+                  <button type="button" class="btn btn-primary" id="nextBtn">
+                    ถัดไป <i class="fas fa-chevron-right"></i>
+                  </button>
+                  
+                  <button type="submit" class="btn btn-success d-none" id="submitBtn">
+                    <i class="fas fa-save"></i> บันทึกข้อมูล
+                  </button>
+                </div>
+              </form>
+            </div>
+            <!-- /.card -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <div class="float-right d-none d-sm-inline">
+      System v1.0
+    </div>
+    <strong>Copyright &copy; 2024 <a href="#">Your Company</a>.</strong> All rights reserved.
+  </footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+
+<!-- Custom Script for Multi-Step Logic -->
+<script>
+  $(document).ready(function() {
+    let currentStep = 1;
+    const totalSteps = 4;
+
+    function updateStep() {
+        // Hide all steps
+        $('.step-section').removeClass('active');
+        // Show current step
+        $(`#step${currentStep}`).addClass('active');
+
+        // Update Progress Bar
+        const progress = ((currentStep - 1) / (totalSteps - 1)) * 100;
+        $('#progress-bar').css('width', `${progress}%`);
+        $('#progress-text').text(`${Math.round(progress)}% เสร็จสิ้น`);
+        
+        // Update Header Badge
+        $('#step-badge').text(`Step ${currentStep}/${totalSteps}`);
+
+        // Update Title dynamically
+        const titles = [
+            "ลงทะเบียนพนักงานใหม่",
+            "ข้อมูลส่วนบุคคล",
+            "ข้อมูลตำแหน่งงาน",
+            "ยืนยันการบันทึก"
+        ];
+        $('#step-title').text(titles[currentStep - 1]);
+
+        // Button Visibility
+        $('#prevBtn').prop('disabled', currentStep === 1);
+        
+        if (currentStep === totalSteps) {
+            $('#nextBtn').addClass('d-none');
+            $('#submitBtn').removeClass('d-none');
+            
+            // Populate Summary Data
+            $('#summary-email').text($('#inputEmail').val() || '-');
+            $('#summary-name').text($('#inputName').val() || '-');
+            $('#summary-address').text($('#inputAddress').val() || '-');
+            $('#summary-dept').text($('#inputDept option:selected').text());
+            $('#summary-role').text($('#inputRole').val() || '-');
+            $('#summary-date').text($('#inputDate').val() || '-');
+        } else {
+            $('#nextBtn').removeClass('d-none');
+            $('#submitBtn').addClass('d-none');
+        }
+    }
+
+    // Next Button Click
+    $('#nextBtn').click(function() {
+        // Simple Validation (Check required inputs in current step)
+        const currentInputs = $(`#step${currentStep}`).find('input[required], select[required]');
+        let isValid = true;
+        
+        currentInputs.each(function() {
+            if (!$(this).val()) {
+                $(this).addClass('is-invalid');
+                isValid = false;
+            } else {
+                $(this).removeClass('is-invalid');
+            }
+        });
+
+        if (!isValid) {
+            alert('กรุณากรอกข้อมูลที่จำเป็นให้ครบถ้วน');
+            return;
+        }
+
+        if (currentStep < totalSteps) {
+            currentStep++;
+            updateStep();
+        }
+    });
+
+    // Previous Button Click
+    $('#prevBtn').click(function() {
+        if (currentStep > 1) {
+            currentStep--;
+            updateStep();
+        }
+    });
+
+    // Form Submit
+    $('#multiStepForm').submit(function(e) {
+        e.preventDefault();
+        // Here you would typically use AJAX or let the form submit normally in PHP
+        alert('บันทึกข้อมูลเรียบร้อย! (พร้อมส่งค่าไป PHP)');
+        // this.submit(); // Uncomment this line to actually submit the form to PHP
+    });
+
+    // Initial Setup
+    updateStep();
+  });
+</script>
+</body>
+</html>
